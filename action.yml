@@ -1,0 +1,35 @@
+name: Eslint
+description: >-
+  Lint project with eslint.
+  Projects must specify eslint as a dependency.
+
+inputs:
+  cache:
+    description: Whether to cache package dependencies.
+    required: false
+    default: "true"
+  node_version:
+    description: The node version to use in version spec syntax.
+    required: false
+    default: "22"
+  working_directory:
+    description: The directory to execute commands in.
+    required: false
+    default: "."
+
+outputs: {}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup node environment
+      uses: lojoja/action-setup-node-env@main
+      with:
+        cache: ${{ inputs.cache }}
+        node_version: ${{ inputs.node_version }}
+        working_directory: ${{ inputs.working_directory }}
+
+    - name: Run eslint
+      run: pnpm eslint .
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}

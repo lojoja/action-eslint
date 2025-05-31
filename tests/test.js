@@ -1,0 +1,3 @@
+const isTrue = () => {
+  return true
+}
