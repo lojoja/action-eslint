@@ -8,6 +8,9 @@ on:
   workflow_call:
   workflow_dispatch:
 
+env:
+  NODE_VERSION: "22"
+
 jobs:
   changes:
     name: Identify changes
@@ -43,7 +46,7 @@ jobs:
       - name: Run eslint action
         uses: ./
         with:
-          node_version: "22"
+          node_version: ${{ env.NODE_VERSION }}
           working_directory: tests
 
   result:
